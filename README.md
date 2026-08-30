@@ -1,6 +1,6 @@
 # To-Do List — Angular Coding Exercise
 
-A small, focused task tracker built in Angular to demonstrate clean component
+A small, ToDo List Application built in Angular to demonstrate clean component
 architecture: reusable components communicating through `@Input`/`@Output`,
 reactive forms, and a single service that owns state and persistence. No
 backend — tasks are stored in the browser via `localStorage`, so your list
