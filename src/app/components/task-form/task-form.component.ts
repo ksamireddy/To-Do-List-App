@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TASK_STATUSES, Task, TaskFormValue } from '../../models/task.model';
 
@@ -24,13 +24,13 @@ export class TaskFormComponent implements OnChanges {
 
   readonly statuses = TASK_STATUSES;
 
+  private readonly fb = inject(FormBuilder);
+
   readonly form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.maxLength(80)]],
     description: ['', [Validators.maxLength(500)]],
     status: ['New' as Task['status'], [Validators.required]]
   });
-
-  constructor(private readonly fb: FormBuilder) {}
 
   get isEditing(): boolean {
     return this.editingTask !== null;
