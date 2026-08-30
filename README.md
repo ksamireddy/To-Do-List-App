@@ -10,21 +10,6 @@ survives a refresh but stays entirely client-side.
 
 ---
 
-## Why this exists
-
-This project was built as a coding exercise to demonstrate a few specific
-Angular fundamentals cleanly, rather than to be a maximal feature set:
-
-- **Data binding** — property binding (`[task]`, `[value]`) and event binding
-  (`(click)`, `(change)`, `(ngSubmit)`) used deliberately throughout.
-- **Angular forms** — a single `ReactiveFormsModule` form drives both the
-  "add" and "edit" flows, with validation and inline error messages.
-- **Reusable components** — `TaskItemComponent` is a pure, presentational
-  component that knows nothing about `TaskService`; it only exposes an
-  `@Input() task` and emits `@Output()` events for the parent to handle.
-- **Predictable state** — one `TaskService`, one `BehaviorSubject`, one
-  `localStorage` key. Every component reads from the same stream.
-
 ## Features
 
 - **View tasks** — a filterable list (`All`, `New`, `In Progress`,
@@ -52,35 +37,6 @@ src/app/
     ├── task-list/                   Filtering + rendering the collection
     └── task-item/                   One reusable, presentational task card
 ```
-
-**Data flow** is intentionally one-directional and easy to trace:
-
-```
-TaskService (state + localStorage)
-   │  tasks$ (Observable<Task[]>)
-   ▼
-AppComponent
-   │  [tasks]                 │  [editingTask]
-   ▼                          ▼
-TaskListComponent        TaskFormComponent
-   │  [task]                     │  (save) / (cancelEdit)
-   ▼                             │
-TaskItemComponent ────────────── ┘
-   (edit) / (delete) / (statusChange)
-```
-
-Only `AppComponent` talks to `TaskService`. Every other component is "dumb":
-it receives data through `@Input` and reports user intent through
-`@Output`, which keeps `TaskItemComponent` and `TaskListComponent` easy to
-reuse, test, and reason about in isolation.
-
-### Why a `TaskService` + `BehaviorSubject` instead of just component state
-
-Task data needs to be shared between the form (editing an existing task) and
-the list (rendering tasks, triggering status changes), and needs to persist
-across reloads. A single injectable service keeps that logic in one place —
-components stay focused on presentation, and swapping `localStorage` for a
-real API later would only mean changing `task.service.ts`.
 
 ## Tech stack
 
