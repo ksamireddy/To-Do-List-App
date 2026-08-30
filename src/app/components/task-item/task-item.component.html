@@ -1,0 +1,31 @@
+<article class="task-card" [ngClass]="statusClass(task.status)">
+  <div class="task-main">
+    <h3 class="task-title">{{ task.title }}</h3>
+    <p class="task-description" *ngIf="task.description">{{ task.description }}</p>
+    <p class="task-description task-description--empty" *ngIf="!task.description">No description provided.</p>
+
+    <div class="task-meta">
+      <span>Updated {{ task.updatedAt | date: 'MMM d, y, h:mm a' }}</span>
+    </div>
+  </div>
+
+  <div class="task-actions">
+    <label class="status-select-wrap">
+      <span class="status-dot" [ngClass]="statusClass(task.status)" aria-hidden="true"></span>
+      <select
+        class="status-select"
+        [ngClass]="statusClass(task.status)"
+        [value]="task.status"
+        (change)="onStatusSelect($event)"
+        [attr.aria-label]="'Change status for ' + task.title"
+      >
+        <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+      </select>
+    </label>
+
+    <div class="task-buttons">
+      <button type="button" class="btn btn-ghost" (click)="onEditClick()">Edit</button>
+      <button type="button" class="btn btn-ghost btn-danger" (click)="onDeleteClick()">Delete</button>
+    </div>
+  </div>
+</article>

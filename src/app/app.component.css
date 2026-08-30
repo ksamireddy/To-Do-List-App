@@ -1,0 +1,59 @@
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 20px 64px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.tagline {
+  margin: 2px 0 0;
+  color: var(--color-ink-faint);
+  font-size: 13px;
+}
+
+.page-body {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  align-items: start;
+  gap: 24px;
+}
+
+.form-column {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 760px) {
+  .page-body {
+    grid-template-columns: 1fr;
+  }
+  .form-column {
+    position: static;
+  }
+}

@@ -1,0 +1,33 @@
+<div class="list-wrap">
+  <div class="filter-row" role="tablist" aria-label="Filter tasks by status">
+    <button
+      *ngFor="let filter of filters"
+      type="button"
+      role="tab"
+      class="filter-chip"
+      [class.active]="activeFilter === filter"
+      [attr.aria-selected]="activeFilter === filter"
+      (click)="setFilter(filter)"
+    >
+      {{ filter }}
+      <span class="filter-count">{{ countFor(filter) }}</span>
+    </button>
+  </div>
+
+  <div class="tasks" *ngIf="filteredTasks.length; else empty">
+    <app-task-item
+      *ngFor="let task of filteredTasks; trackBy: trackByTaskId"
+      [task]="task"
+      (statusChange)="onStatusChange(task, $event)"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+    ></app-task-item>
+  </div>
+
+  <ng-template #empty>
+    <div class="empty-state">
+      <p *ngIf="activeFilter === 'All'">No tasks yet. Add your first one above.</p>
+      <p *ngIf="activeFilter !== 'All'">No tasks are currently "{{ activeFilter }}".</p>
+    </div>
+  </ng-template>
+</div>

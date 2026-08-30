@@ -1,0 +1,51 @@
+<form class="task-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-header">
+    <h2>{{ isEditing ? 'Edit task' : 'Add a task' }}</h2>
+    <button
+      *ngIf="isEditing"
+      type="button"
+      class="btn btn-ghost"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+  </div>
+
+  <div class="field">
+    <label for="title">Title</label>
+    <input
+      id="title"
+      type="text"
+      formControlName="title"
+      placeholder="e.g. Write the release notes"
+      [class.invalid]="titleControl.invalid && titleControl.touched"
+    />
+    <p class="error" *ngIf="titleControl.invalid && titleControl.touched">
+      <span *ngIf="titleControl.errors?.['required']">A title is required.</span>
+      <span *ngIf="titleControl.errors?.['maxlength']">Keep the title under 80 characters.</span>
+    </p>
+  </div>
+
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      formControlName="description"
+      rows="3"
+      placeholder="Optional details about this task"
+    ></textarea>
+  </div>
+
+  <div class="field" *ngIf="isEditing">
+    <label for="status">Status</label>
+    <select id="status" formControlName="status">
+      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+    </select>
+  </div>
+
+  <div class="form-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      {{ isEditing ? 'Save changes' : 'Add task' }}
+    </button>
+  </div>
+</form>

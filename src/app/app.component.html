@@ -1,0 +1,30 @@
+<div class="page">
+  <header class="page-header">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">&#10003;</span>
+      <div>
+        <h1>To-Do</h1>
+        <p class="tagline">A small, honest task tracker.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-body">
+    <section class="form-column" aria-label="Add or edit task">
+      <app-task-form
+        [editingTask]="editingTask"
+        (save)="onSave($event)"
+        (cancelEdit)="onCancelEdit()"
+      ></app-task-form>
+    </section>
+
+    <section class="list-column" aria-label="Task list">
+      <app-task-list
+        [tasks]="tasks"
+        (statusChange)="onStatusChange($event)"
+        (edit)="onEditRequested($event)"
+        (delete)="onDeleteRequested($event)"
+      ></app-task-list>
+    </section>
+  </main>
+</div>

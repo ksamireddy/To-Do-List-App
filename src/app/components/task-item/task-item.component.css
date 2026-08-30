@@ -1,0 +1,168 @@
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-ink-faint);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.task-card:hover {
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-1px);
+}
+
+.task-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.task-title {
+  font-size: 16px;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.task-description {
+  margin: 6px 0 0;
+  color: var(--color-ink-soft);
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.task-description--empty {
+  color: var(--color-ink-faint);
+  font-style: italic;
+}
+
+.task-meta {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--color-ink-faint);
+}
+
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.status-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.status-dot {
+  position: absolute;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  pointer-events: none;
+}
+
+.status-select {
+  appearance: none;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 28px 6px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 14px) center, calc(100% - 9px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-ink-soft);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--color-surface-sunken);
+  color: var(--color-ink);
+}
+
+.btn-danger:hover {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+/* Status color system: one accent per status, applied consistently
+   to the card's left spine, the status dot, and the select control. */
+.status-new {
+  border-left-color: var(--status-new);
+  color: var(--status-new);
+}
+.status-new.status-select {
+  background-color: var(--status-new-soft);
+}
+
+.status-in-progress {
+  border-left-color: var(--status-in-progress);
+  color: var(--status-in-progress);
+}
+.status-in-progress.status-select {
+  background-color: var(--status-in-progress-soft);
+}
+
+.status-rejected {
+  border-left-color: var(--status-rejected);
+  color: var(--status-rejected);
+}
+.status-rejected.status-select {
+  background-color: var(--status-rejected-soft);
+}
+
+.status-verified {
+  border-left-color: var(--status-verified);
+  color: var(--status-verified);
+}
+.status-verified.status-select {
+  background-color: var(--status-verified-soft);
+}
+
+.status-completed {
+  border-left-color: var(--status-completed);
+  color: var(--status-completed);
+}
+.status-completed.status-select {
+  background-color: var(--status-completed-soft);
+}
+
+@media (max-width: 560px) {
+  .task-card {
+    flex-direction: column;
+  }
+  .task-actions {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
